@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!--<link rel="stylesheet" type="text/css" href="/style.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
     <title>Omnicook. Your one stop cooking recipe station.</title>
+    
 </head>
 <body>
     {% block title %}{% endblock %}
     {% block content %}{% endblock %}
-    <div id='footer'>
-        &copy; Tommy Lee 2019<br/>
-        tonglin.lee@gmail.com
-    </div>
+    <footer>
+      <p>Tommy Lee &copy; 2019</p>
+      <p>Contact information: <a href="mailto:tonglin.lee@gmail.com">
+      tonglin.lee@gmail.com</a>.</p>
+    </footer>
 </body>
 </html>

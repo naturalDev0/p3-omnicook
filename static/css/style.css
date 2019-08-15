@@ -1,0 +1,23 @@
+/* IMPORTS : API */
+@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+
+* {
+    font-family: 'Merriweather', serif;
+}
+
+
+/* Footer layout
+*/
+footer {
+  position: fixed;
+  
+  left: 0;
+  bottom: 0;
+  
+  width: 100%;
+  
+  background-color: red;
+  color: white;
+  
+  text-align: center;
+}
