@@ -1,13 +1,24 @@
-/* IMPORTS : API */
-@import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');
 
+/* ALL ELEMENTS */
 * {
-    font-family: 'Merriweather', serif;
+    font-family: 'Roboto Slab', serif;
 }
-
 
 /* Footer layout
 */
+
+
+footer p a:link {
+  text-decoration: none;
+  color: white;
+}
+footer p a:hover {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
 footer {
   position: fixed;
   
@@ -16,7 +27,7 @@ footer {
   
   width: 100%;
   
-  background-color: red;
+  background-color: #235789;
   color: white;
   
   text-align: center;

@@ -16,6 +16,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
 # Boilerplate
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
