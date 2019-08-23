@@ -5,15 +5,18 @@
     font-family: 'Roboto Slab', serif;
 }
 
+/* IDs */
+#main-content {
+  margin-top: 5rem;
+}
+
 /* Footer layout
 */
-
-
-footer p a:link {
+footer div a:link {
   text-decoration: none;
   color: white;
 }
-footer p a:hover {
+footer div a:hover {
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -21,14 +24,10 @@ footer p a:hover {
 
 footer {
   position: fixed;
-  
   left: 0;
   bottom: 0;
-  
   width: 100%;
-  
   background-color: #235789;
   color: white;
-  
   text-align: center;
 }

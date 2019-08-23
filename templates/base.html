@@ -5,27 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Customised CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    
     <title>Omnicook. Your one stop cooking recipe station.</title>
 
 </head>
 
 <body>
 
-    {% block title %}{% endblock %} {% block content %}{% endblock %}
+    <!-- navbar content -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-5">
+        <a class="navbar-brand" href="{{ url_for('index') }}">OMNICOOK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                {% block navlinks %}{% endblock %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- main content -->
+    <main id="main-content" class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <!-- footer content -->
     <footer>
-        <p>
-            Tommy Lee &copy; 2019<br>
-            <a class="email-footer" href="mailto:tonglin.lee@gmail.com">
-          tonglin.lee@gmail.com</a>
-        </p>
+        <div class="container-fluid pt-1">
+            <p>Tommy Lee &copy; 2019<br>
+                <a href="mailto:tonglin.lee@gmail.com">tonglin.lee@gmail.com</a>
+            </p>
+        </div>
     </footer>
 
     <!-- Optional JavaScript -->
@@ -33,6 +54,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

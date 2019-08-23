@@ -16,6 +16,21 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route('/recipe/add')
+def add_recipe():
+    return render_template("recipe_add.html")
+
+@app.route('/recipe/edit')
+def edit_recipe():
+    return render_template("recipe_edit.html")
+    
+@app.route('/recipe')
+def view_recipe():
+    return render_template("recipe_view.html")
+    
+@app.route('/recipe/delete')
+def delete_recipe():
+    return render_template("recipe_delete.html")
 
 # Boilerplate
 if __name__ == '__main__':
