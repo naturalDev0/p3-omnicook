@@ -1,0 +1,51 @@
+<!-- Add Recipe -->
+{% extends "base.html" %}
+
+<!-- Navbar section -->
+{% block navlinks %}
+<li class="nav-item active">
+    <a class="nav-link active" href="{{ url_for('add_recipe') }}">add.</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('edit_recipe') }}">edit.</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ url_for('delete_recipe') }}">delete.</a>
+</li>
+{% endblock %}
+
+<!-- Main Content section -->
+{% block content %}
+<h2>New Recipe</h2>
+<p>This is your content</p>
+<div>
+    <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
+</div>
+<div class="container mt-3">
+    <form>
+      
+        <div class="form-group">
+            <label for="recipeName">Name</label>
+            <input type="text" class="form-control" id="recipeName" placeholder="recipe name">
+        </div>
+      
+        <div class="form-group">
+            <label for="recipeIngredients">Ingredients</label>
+            <textarea class="form-control" id="recipeIngredients" placeholder="E.g.&#10;Pepper - 1 tbsp &#10;Garlic (small) - 2" rows="4"></textarea>    
+        </div>
+        
+        <div class="form-group">
+            <label for="recipeMethods">Methods</label>
+            <textarea class="form-control" id="recipeMethods" placeholder="E.g.&#10;Step 1. Add pepper&#10;Step 2. Chop the garlics..." rows="4"></textarea>    
+        </div>
+        
+        <div class="form-group">
+            <label for="recipeAuthor">Author</label>
+            <input type="text" class="form-control" id="recipeAuthor" placeholder="recipe author">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" role="button">Submit Recipe</button>
+      
+    </form>
+</div>
+{% endblock %}

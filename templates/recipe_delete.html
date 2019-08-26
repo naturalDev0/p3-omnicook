@@ -1,4 +1,4 @@
-<!-- Homepage -->
+<!-- Delete Recipe -->
 {% extends "base.html" %}
 
 <!-- Navbar section -->
@@ -9,16 +9,16 @@
 <li class="nav-item">
     <a class="nav-link" href="{{ url_for('edit_recipe') }}">edit.</a>
 </li>
-<li class="nav-item">
+<li class="nav-item active">
     <a class="nav-link" href="{{ url_for('delete_recipe') }}">delete.</a>
 </li>
 {% endblock %}
 
 <!-- Main Content section -->
 {% block content %}
-<h1>Welcome to Omnicook!</h1>
+<h2>DELETE Recipe</h2>
 <p>This is your content</p>
 <div>
-    <a class="btn btn-primary" href="{{ url_for('add_recipe') }}" role="button">Add Recipe</a>
+    <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
 </div>
 {% endblock %}
