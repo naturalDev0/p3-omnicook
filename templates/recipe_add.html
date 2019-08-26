@@ -17,7 +17,6 @@
 <!-- Main Content section -->
 {% block content %}
 <h2>New Recipe</h2>
-<p>This is your content</p>
 <div>
     <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
 </div>
@@ -31,6 +30,9 @@
       
         <div class="form-group">
             <label for="recipeIngredients">Ingredients</label>
+            <object class="align-justify" type="image/svg+xml" data="{{url_for('static', filename='image/plus.svg')}}">
+                Your browser does not support SVG
+            </object>
             <textarea class="form-control" id="recipeIngredients" placeholder="E.g.&#10;Pepper - 1 tbsp &#10;Garlic (small) - 2" rows="4"></textarea>    
         </div>
         
@@ -55,7 +57,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="recipeAllergen">Allergen</label>
-                <select class="form-control" id="recipeAllergen">
+                <select name="allergen" class="form-control" id="recipeAllergen">
                     {%for a in allergens %}
                         <option value='{{ a['id'] }}'>{{ a['allergen_type'] }}</option>
                     {%endfor%}

@@ -31,7 +31,6 @@ def add_recipe():
     # Store results in a 'allergens' list
     allergens = []
     for r in cursor:
-        print('allergens: %s' % r)
         allergens.append(r)
     
     # Retrieve data from 'cuisine' table
@@ -41,7 +40,6 @@ def add_recipe():
     # Store results in a 'cuisines' list
     cuisines = []
     for r in cursor:
-        print('cuisines: %s' % r)
         cuisines.append(r)
     
     return render_template("recipe_add.html", cuisines=cuisines, allergens=allergens)
