@@ -5,12 +5,12 @@ import pymysql
 app = Flask(__name__)
 
 # Initialize selected DB connection
-# connection = pymysql.connect(
-#     host='localhost', # IP address of the database; localhost means "the local machine"
-#     user="admin",  #the mysql user
-#     password="password", #the password for the user
-#     database="Chinook" #the name of database we want to use
-# )
+connection = pymysql.connect(
+    host='localhost', # IP address of the database; localhost means "the local machine"
+    user="admin",  #the mysql user
+    password="n0tY0urP@55w0rd", #the password for the user
+    database="cookbook" #the name of database we want to use
+)
 
 # ROUTE : Homepage
 @app.route('/')
@@ -18,9 +18,38 @@ def index():
     return render_template("index.html")
 
 # ROUTE : Add recipe
-@app.route('/recipe/add')
+@app.route('/recipe/add', methods=['GET'])
 def add_recipe():
+    
+    # Set DB connection
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    
+    # Retrieve data from 'allergen' table
+    sql_query_1 = "SELECT * FROM allergen"
+    cursor.execute(sql_query_1)
+    
+    # Store results in a 'allergens' list
+    allergens = []
+    for r in cursor:
+        print('allergens: %s' % r)
+        allergens.append(r)
+    
+    # Retrieve data from 'cuisine' table
+    sql_query_2 = "SELECT * FROM cuisine"
+    cursor.execute(sql_query_2)
+    
+    # Store results in a 'cuisines' list
+    cuisines = []
+    for r in cursor:
+        print('cuisines: %s' % r)
+        cuisines.append(r)
+    
+    return render_template("recipe_add.html", cuisines=cuisines, allergens=allergens)
+    
+@app.route('/recipe/add', methods=['POST'])
+def create_add_recipe():
     return render_template("recipe_add.html")
+
 
 # ROUTE : Edit recipe
 @app.route('/recipe/edit')
