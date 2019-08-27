@@ -77,7 +77,7 @@ In addition, if it is not obvious, you should also describe how to run your code
 
 <i>- I have took inspirations from the following sites...</i>
 Misc
-(Font) https://fonts.google.com/
+(Font) [Google Fonts](https://fonts.google.com/)
 
 Inspirations
 
