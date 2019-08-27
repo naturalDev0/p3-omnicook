@@ -73,9 +73,27 @@ In addition, if it is not obvious, you should also describe how to run your code
 ### Content
 - 
 
-### Media
-- The photos used in this site were obtained from ...
-
 ### Acknowledgements
 
-- I received inspiration for this project from X
+<i>- I have took inspirations from the following sites...</i>
+Misc
+(Font) https://fonts.google.com/
+
+Inspirations
+
+→ Web layout
+[kinokuniya](https://kinokuniya.com.sg/)
+[justonecookbook](https://www.justonecookbook.com/)
+[popular](https://www.popular.com.sg/)
+
+→ Web layout, Fields to implement in DB
+[allrecipes](https://www.allrecipes.com/)
+[foodnetwork](https://www.foodnetwork.com/)
+[bbcgoodfood's cuisines](https://www.bbcgoodfood.com/recipes/category/cuisines)
+* Idea on the ‘Type of cuisines’
+
+→ Web layout content
+[foodallergy's common-allergens](https://www.foodallergy.org/common-allergens)
+* Idea on the ‘Type of allergens’
+
+

@@ -23,10 +23,10 @@ import pymysql
 # )
 
 connection = pymysql.connect(
-    host='localhost',              # IP address of the database; localhost means "the local machine"
-    user='Admin',          #the mysql user
-    password='n0tY0urP@55w0rd',      #the password for the user
-    database='cookbook'      #the name of database we want to use
+    host="localhost",               # IP address of the database; localhost means "the local machine"
+    user="admin",                   #the mysql user
+    password="n0tY0urP@55w0rd",     #the password for the user
+    database="cookbook"             #the name of database we want to use
 )
 
 app = Flask(__name__)
