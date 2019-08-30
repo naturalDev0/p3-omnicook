@@ -32,8 +32,12 @@ In addition, you may also use this section to discuss plans for additional featu
 
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
+- HTML5
+- CSS3
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
+- Python 3
+- Flask
 
 
 ## Testing
@@ -77,7 +81,7 @@ In addition, if it is not obvious, you should also describe how to run your code
 
 <i>- I have took inspirations from the following sites...</i>
 Misc
-(Font) [Google Fonts](https://fonts.google.com/)
+(Font)[Google Fonts](https://fonts.google.com/)
 
 Inspirations
 
