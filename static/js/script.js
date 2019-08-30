@@ -9,7 +9,7 @@ $(document).ready(function() {
         addRowId = 'field' + nextNo;
         addRow = '#field' + nextNo;
 
-        var newRow = '<div class="form-row" id="' + addRowId + '">' +
+        var newRow = '<div class="form-row justify-content-center" id="' + addRowId + '">' +
             /* '<div class="form-group col-md-1">' +
             '<span class="align-middle" id="ingred-no-' + nextNo + '">' + nextNo + '</span>' +
             '</div>' + */

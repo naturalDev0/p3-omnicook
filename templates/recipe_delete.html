@@ -1,19 +1,6 @@
 <!-- Delete Recipe -->
 {% extends "base.html" %}
 
-<!-- Navbar section -->
-{% block navlinks %}
-<li class="nav-item">
-    <a class="nav-link" href="{{ url_for('add_recipe') }}">add.</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="{{ url_for('edit_recipe') }}">edit.</a>
-</li>
-<li class="nav-item active">
-    <a class="nav-link" href="{{ url_for('delete_recipe') }}">delete.</a>
-</li>
-{% endblock %}
-
 <!-- Main Content section -->
 {% block content %}
 <h2>DELETE Recipe</h2>

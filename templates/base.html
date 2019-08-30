@@ -11,7 +11,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+
     <title>Omnicook. Your one stop cooking recipe station.</title>
 
 </head>
@@ -20,15 +20,24 @@
 
     <!-- navbar content -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-5">
-        <a class="navbar-brand" href="{{ url_for('index') }}">OMNICOOK</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                {% block navlinks %}{% endblock %}
-            </ul>
-        </div>
+      <a class="navbar-brand" href="{{ url_for('index') }}">Omnicook</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#omnicook-navbar" aria-controls="omnicook-navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="omnicook-navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add_recipe') }}">add.</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('edit_recipe') }}">edit.</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('delete_recipe') }}">delete.</a>
+            </li>
+        </ul>
+      </div>
     </nav>
 
     <!-- main content -->
