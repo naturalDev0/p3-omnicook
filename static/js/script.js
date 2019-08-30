@@ -10,9 +10,9 @@ $(document).ready(function() {
         addRow = '#field' + nextNo;
 
         var newRow = '<div class="form-row" id="' + addRowId + '">' +
-            '<div class="form-group col-md-1">' +
+            /* '<div class="form-group col-md-1">' +
             '<span class="align-middle" id="ingred-no-' + nextNo + '">' + nextNo + '</span>' +
-            '</div>' +
+            '</div>' + */
             '<div class="form-group col-md-5">' +
             '<input type="text" class="form-control" id="ingred-name-' + nextNo + '" placeholder="insert your ingredient...">' +
             '</div>' +
