@@ -8,49 +8,42 @@
     <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
 </div>
 <div class="container mt-3">
-    <form>
-      
+    <form method="POST">
         <div class="form-group">
             <label for="recipeName">Name</label>
-            <input type="text" class="form-control" id="recipeName" placeholder="recipe name">
-        </div>
-      
-        <div class="form-group">
-            <label for="recipeIngredients">Ingredients</label>
-            <textarea class="form-control" id="recipeIngredients" placeholder="E.g.&#10;Pepper - 1 tbsp &#10;Garlic (small) - 2" rows="4"></textarea>    
+            <input type="text" class="form-control" name="recipeName" id="recipeName" placeholder="recipe name">
         </div>
         
+        <div class="form-group">
+            <label for="recipeDesc">Description</label>
+            <textarea class="form-control" id="recipeDesc" name="recipeDesc" placeholder="E.g.&#10;This is recipe that contains ..." rows="4"></textarea>
+        </div>
+        <div class="form-group" id="fields">
+            <label for="recipeIngredients">Ingredients
+                <span>
+                    <button type="text" class="btn btn-primary align-middle add-row" role="button">Add</button>
+                </span>
+            </label>
+        </div>
         <div class="form-group">
             <label for="recipeMethods">Methods</label>
-            <textarea class="form-control" id="recipeMethods" placeholder="E.g.&#10;Step 1. Add pepper&#10;Step 2. Chop the garlics..." rows="4"></textarea>    
+            <textarea class="form-control" id="recipeMethods" name="recipeMethods" placeholder="E.g.&#10;Step 1. Add pepper&#10;Step 2. Chop the garlics..." rows="4"></textarea>
         </div>
-        
-        <div class="form-group">
-            <label for="recipeAuthor">Author</label>
-            <input type="text" class="form-control" id="recipeAuthor" placeholder="recipe author">
-        </div>
-        
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="recipeCuisine">Cuisine</label>
-                <select class="form-control" id="recipeCuisine">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
+                <label for="recipeAuthor">Author</label>
+                <input type="text" class="form-control" id="recipeAuthor" name="recipeAuthor" placeholder="recipe author">
             </div>
             <div class="form-group col-md-6">
-                <label for="recipeAllergen">Allergen</label>
-                <select class="form-control" id="recipeAllergen">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                <label for="recipeCuisine">Cuisine</label>
+                <select name="recipeCuisine" class="form-control" id="recipeCuisine">
+                    {%for c in cuisines %}
+                        <option value='{{ c['id'] }}'>{{ c['cuisine_type'] }}</option>
+                    {%endfor%}
                 </select>
             </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary" role="button">Update Recipe</button>
-      
+        <button type="submit" class="btn btn-primary" role="button">Submit Recipe</button>
     </form>
 </div>
 

@@ -22,12 +22,14 @@ import pymysql
 #     port=port
 # )
 
-connection = pymysql.connect(
-    host="localhost",               # IP address of the database; localhost means "the local machine"
-    user="admin",                   # the mysql user
-    password="n0tY0urP@55w0rd",     # the password for the user
-    database="cookbook"             # the name of database we want to use
-)
+def connect():
+    connection = pymysql.connect(
+        host="localhost",               # IP address of the database; localhost means "the local machine"
+        user="admin",                   # the mysql user
+        password="n0tY0urP@55w0rd",     # the password for the user
+        database="cookbook"             # the name of database we want to use
+    )
+    return connection
 
 app = Flask(__name__)
 
@@ -40,32 +42,69 @@ def index():
 @app.route('/recipe/add', methods=['GET'])
 def add_recipe():
     
+    # Connect to DB
+    connection = connect()
+    
     # Set DB connection
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
-    # Retrieve data from 'allergen' table
-    sql_query_1 = "SELECT * FROM allergen"
-    cursor.execute(sql_query_1)
-    
-    # Store results in a 'allergens' list
-    allergens = []
-    for r in cursor:
-        allergens.append(r)
-    
     # Retrieve data from 'cuisine' table
-    sql_query_2 = "SELECT * FROM cuisine"
-    cursor.execute(sql_query_2)
+    sql_query = "SELECT * FROM cuisine"
+    cursor.execute(sql_query)
     
     # Store results in a 'cuisines' list
     cuisines = []
     for r in cursor:
         cuisines.append(r)
     
-    return render_template("recipe_add.html", cuisines=cuisines, allergens=allergens)
+    cursor.close()
+    
+    return render_template("recipe_add.html", cuisines=cuisines)
     
 @app.route('/recipe/add', methods=['POST'])
 def create_add_recipe():
-    return render_template("recipe_add.html")
+    
+    recipe_name = request.form.get('recipeName')
+    # print("recipe title: {}".format(recipe_name))
+    recipe_desc = request.form.get('recipeDesc')
+    recipe_methods = request.form.get('recipeMethods')
+    recipe_ingred = request.form.get('ingred-name-1')
+    recipe_ingred_serve = request.form.get('ingred-serve-1')
+    recipe_author = request.form.get('recipeAuthor')
+    recipe_cuisine = request.form.get('recipeCuisine')
+    
+    # Connect to DB
+    connection = connect()
+    
+    # Set DB connection
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    
+    sql_query = "INSERT INTO ingredient_name (ingred_name) VALUES ('{}')".format(recipe_ingred)
+    cursor.execute(sql_query)
+    last_ingredName_rowId = cursor.lastrowid
+    # print("lastrowid: %d" % last_ingredName_rowId)
+    
+    sql_query = "INSERT INTO ingredient (ingred_name_id, ingred_serving) VALUES ({},'{}')".format(last_ingredName_rowId, recipe_ingred_serve)
+    cursor.execute(sql_query)
+    last_ingred_rowId = cursor.lastrowid
+                
+    sql_query = "INSERT INTO author (author_name) VALUES ('{}')".format(recipe_author)
+    cursor.execute(sql_query)
+    last_author_id = cursor.lastrowid
+    
+    # Missing 'recipe_image' for now
+    sql_query = "INSERT INTO recipe (recipe_title, recipe_desc, recipe_methods, cuisine_id, author_id) VALUES ('{}', '{}', '{}', {}, {})".format(recipe_name, recipe_desc, recipe_methods, recipe_cuisine, last_author_id)
+    # print("{} {} {} {} {} {} {}".format(recipe_name, recipe_desc, recipe_methods, recipe_ingred, recipe_ingred_serve, recipe_author, recipe_cuisine))
+    cursor.execute(sql_query)
+    last_recipe_id = cursor.lastrowid
+    
+    sql_query = "INSERT INTO ingredient_recipe (ingredient, recipe) VALUES ({}, {})".format(last_ingred_rowId, last_recipe_id)
+    cursor.execute(sql_query)
+    
+    connection.commit()
+    cursor.close()
+    
+    return redirect(url_for('index'))
 
 
 # ROUTE : Edit recipe
