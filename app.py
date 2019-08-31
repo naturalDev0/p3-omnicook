@@ -34,9 +34,30 @@ def connect():
 app = Flask(__name__)
 
 # ROUTE : Homepage
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return render_template("index.html")
+    
+    # Connect to DB
+    connection = connect()
+    
+    # Set DB connection
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    
+    sql_query = "SELECT recipe.id, recipe.recipe_title, recipe.recipe_desc, recipe.recipe_methods, cuisine.cuisine_type FROM recipe INNER JOIN cuisine ON recipe.cuisine_id=cuisine.id"
+    
+    sql_query = "SELECT * FROM recipe"
+    cursor.execute(sql_query)
+    recipes = []
+    for r in cursor:
+        recipes.append(r)
+    print(recipes)
+    
+    # sql_query = "SELECT cuisine_type FROM cuisine WHERE id= {}".format(recipes['cuisine_id'])
+    # cursor.execute(sql_query)
+    
+    cursor.close()
+    
+    return render_template("index.html", recipes=recipes)
 
 # ROUTE : Add recipe
 @app.route('/recipe/add', methods=['GET'])
@@ -118,10 +139,19 @@ def view_recipe():
     return render_template("recipe_view.html")
 
 # ROUTE : Delete recipe    
-@app.route('/recipe/delete')
-def delete_recipe():
-    return render_template("recipe_delete.html")
+@app.route('/recipe/delete/<recipeId>')
+def delete_recipe(recipeId):
+    connection = connect()
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql_query = "SELECT * FROM recipe WHERE id = {}".format(recipeId)
+    cursor.execute(sql_query)
+    recipeId = cursor.fetchone()
+    
+    return render_template("recipe_delete.html", recipeId=recipeId)
 
+@app.route('/recipe/delete/confirmed/<recipeId>', methods=['POST'])
+def confirmed_delete_recipe(recipeId):
+    return redirect(url_for('index'))
 
 # Boilerplate
 if __name__ == '__main__':

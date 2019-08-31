@@ -3,8 +3,20 @@
 
 <!-- Main Content section -->
 {% block content %}
-<h2>DELETE Recipe</h2>
-<div>
-    <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
+<h2>Delete Recipe</h2>
+<div class="container-fluid w-75 justify-content-center">
+    <div class="alert alert-danger" role="alert">
+        <form method="POST" action="{{ url_for('confirm_delete_recipe', recipeId=recipeId['id']) }}">
+            <h3 class="alert-heading">You are deleting... [Recipe] {{ recipeId['recipe_title']}}</h3>
+            <p>Confirm?</p>
+            <hr>
+            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="#" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
 </div>
+<div>
+    <a class="btn btn-warning" href="#" role="button">Back to Home</a>
+</div>
+
 {% endblock %}
