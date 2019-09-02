@@ -92,11 +92,8 @@ def create_add_recipe():
     recipe_author = request.form.get('recipeAuthor')                        # Recipe author
     recipe_cuisine = request.form.get('recipeCuisine')                      # Recipe cuisine
     
-    # Connect to DB
-    connection = connect()
-    
-    # Set DB connection
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
     
     # Get last row id of ingredient name
     last_ingred_name_ids = []
@@ -149,8 +146,10 @@ def view_recipe():
 # ROUTE : Delete recipe    
 @app.route('/recipe/delete/<recipeId>')
 def delete_recipe(recipeId):
-    connection = connect()
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
+    
     sql_query = "SELECT * FROM recipe WHERE id = {}".format(recipeId)
     cursor.execute(sql_query)
     recipeId = cursor.fetchone()
@@ -162,11 +161,45 @@ def delete_recipe(recipeId):
 @app.route('/recipe/delete/confirmed/<recipeId>', methods=['POST'])
 def confirmed_delete_recipe(recipeId):
     
-    connection = connect()
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    sql_query = "SELECT * FROM recipe WHERE id = {}".format(recipeId)
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
+    
+    # Retrieve ingredient ids from ingredient_recipe
+    getIngredientIds = []
+    sql_query = "SELECT ingredient FROM ingredient_recipe WHERE recipe={}".format(recipeId)
+    cursor.execute(sql_query)
+    for r in cursor:
+        getIngredientIds.append(r['ingredient'])
+    
+    # Remove ingredients and serving from ingredient    
+    for i in getIngredientIds:
+        sql_query = "DELETE FROM ingredient WHERE id={}".format(i)
+        cursor.execute(sql_query)
+    
+    # Remove ingredient dependencies from ingredient_recipe using recipeId
+    sql_query = "DELETE FROM ingredient_recipe WHERE recipe={}".format(recipeId)
     cursor.execute(sql_query)
     
+    # Retrieve author id from recipe
+    getAuthorId = 0
+    sql_query = "SELECT author_id FROM recipe WHERE id = {}".format(recipeId)
+    cursor.execute(sql_query)
+    getAuthorId = cursor.fetchone()
+    authorId = getAuthorId['author_id']
+    
+    # Remove author from author
+    sql_query = "DELETE FROM author WHERE id={}".format(authorId)
+    cursor.execute(sql_query)
+    
+    # Lastly, Remove recipe from recipe
+    sql_query = "DELETE FROM recipe WHERE id={}".format(recipeId)
+    cursor.execute(sql_query)
+    
+    # Committing changes to database
+    connection.commit()
+    
+    # Close connection
+    cursor.close()
     
     return redirect(url_for('index'))
 
