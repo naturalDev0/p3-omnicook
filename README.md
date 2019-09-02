@@ -129,8 +129,8 @@ NOTE: All commits are pushed to master branch, as currently there is no intentio
 <i>- I have took inspirations from the following sites...</i>
 
 Misc
-
 1. [Google Fonts](https://fonts.google.com/) - (Font)
+2. [Bytesize Icons](https://github.com/danklammer/bytesize-icons)
 
 → Web layout
 1. [kinokuniya](https://kinokuniya.com.sg/)
@@ -142,9 +142,5 @@ Misc
 1. [foodnetwork](https://www.foodnetwork.com/)
 1. [bbcgoodfood's cuisines](https://www.bbcgoodfood.com/recipes/category/cuisines)
     * Idea on the ‘Type of cuisines’
-
-→ Web layout content
-[foodallergy's common-allergens](https://www.foodallergy.org/common-allergens)
-* Idea on the ‘Type of allergens’
 
 ***This is for educational use.***

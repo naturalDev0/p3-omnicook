@@ -43,14 +43,13 @@ def index():
     # Set DB connection
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
-    sql_query = "SELECT recipe.id, recipe.recipe_title, recipe.recipe_desc, recipe.recipe_methods, cuisine.cuisine_type FROM recipe INNER JOIN cuisine ON recipe.cuisine_id=cuisine.id"
+    sql_query = "SELECT recipe.id, recipe.recipe_title, recipe.recipe_desc, recipe.recipe_methods, cuisine.cuisine_type, author.author_name FROM recipe INNER JOIN cuisine ON recipe.cuisine_id=cuisine.id INNER JOIN author ON recipe.author_id=author.id"
     
-    sql_query = "SELECT * FROM recipe"
     cursor.execute(sql_query)
     recipes = []
     for r in cursor:
         recipes.append(r)
-    print(recipes)
+    # print(recipes)
     
     # sql_query = "SELECT cuisine_type FROM cuisine WHERE id= {}".format(recipes['cuisine_id'])
     # cursor.execute(sql_query)
@@ -79,20 +78,19 @@ def add_recipe():
         cuisines.append(r)
     
     cursor.close()
-    
     return render_template("recipe_add.html", cuisines=cuisines)
     
 @app.route('/recipe/add', methods=['POST'])
 def create_add_recipe():
     
-    recipe_name = request.form.get('recipeName')
-    # print("recipe title: {}".format(recipe_name))
-    recipe_desc = request.form.get('recipeDesc')
-    recipe_methods = request.form.get('recipeMethods')
-    recipe_ingred = request.form.get('ingred-name-1')
-    recipe_ingred_serve = request.form.get('ingred-serve-1')
-    recipe_author = request.form.get('recipeAuthor')
-    recipe_cuisine = request.form.get('recipeCuisine')
+    # Get form values ...
+    recipe_name = request.form.get('recipeName')                            # Recipe name
+    recipe_desc = request.form.get('recipeDesc')                            # Recipe description
+    recipe_methods = request.form.get('recipeMethods')                      # Recipe methods
+    recipe_ingred_form = request.form.getlist('ingred-name[]')              # Array : Recipe ingredients
+    recipe_ingred_serve_form = request.form.getlist('ingred-serve[]')       # Array : Recipe ingredient's serving
+    recipe_author = request.form.get('recipeAuthor')                        # Recipe author
+    recipe_cuisine = request.form.get('recipeCuisine')                      # Recipe cuisine
     
     # Connect to DB
     connection = connect()
@@ -100,27 +98,37 @@ def create_add_recipe():
     # Set DB connection
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
-    sql_query = "INSERT INTO ingredient_name (ingred_name) VALUES ('{}')".format(recipe_ingred)
-    cursor.execute(sql_query)
-    last_ingredName_rowId = cursor.lastrowid
-    # print("lastrowid: %d" % last_ingredName_rowId)
+    # Get last row id of ingredient name
+    last_ingred_name_ids = []
+    for i in recipe_ingred_form:
+        print(i)
+        sql_query = "INSERT INTO ingredient_name (ingred_name) VALUES ('{}')".format(i)
+        cursor.execute(sql_query)
+        last_ingred_name_ids.append(cursor.lastrowid)
+    print("IngredNameIds: {}".format(last_ingred_name_ids))
     
-    sql_query = "INSERT INTO ingredient (ingred_name_id, ingred_serving) VALUES ({},'{}')".format(last_ingredName_rowId, recipe_ingred_serve)
-    cursor.execute(sql_query)
-    last_ingred_rowId = cursor.lastrowid
+    # Get last row id of ingredient
+    ingred_ids = []
+    for ingredNameId, ingredServe in zip(last_ingred_name_ids, recipe_ingred_serve_form):
+        print("i_n: {}, i_s: {}".format(ingredNameId, ingredServe))
+        sql_query = "INSERT INTO ingredient (ingred_name_id, ingred_serving) VALUES ('{}','{}')".format(ingredNameId, ingredServe)
+        cursor.execute(sql_query)
+        ingred_ids.append(cursor.lastrowid)
                 
+    #  Create new author
     sql_query = "INSERT INTO author (author_name) VALUES ('{}')".format(recipe_author)
     cursor.execute(sql_query)
     last_author_id = cursor.lastrowid
     
-    # Missing 'recipe_image' for now
+    #### Missing 'recipe_image' for now
     sql_query = "INSERT INTO recipe (recipe_title, recipe_desc, recipe_methods, cuisine_id, author_id) VALUES ('{}', '{}', '{}', {}, {})".format(recipe_name, recipe_desc, recipe_methods, recipe_cuisine, last_author_id)
-    # print("{} {} {} {} {} {} {}".format(recipe_name, recipe_desc, recipe_methods, recipe_ingred, recipe_ingred_serve, recipe_author, recipe_cuisine))
     cursor.execute(sql_query)
     last_recipe_id = cursor.lastrowid
     
-    sql_query = "INSERT INTO ingredient_recipe (ingredient, recipe) VALUES ({}, {})".format(last_ingred_rowId, last_recipe_id)
-    cursor.execute(sql_query)
+    # Create new relation between recipe and ingredient
+    for i in ingred_ids:
+        sql_query = "INSERT INTO ingredient_recipe (ingredient, recipe) VALUES ({}, {})".format(i, last_recipe_id)
+        cursor.execute(sql_query)
     
     connection.commit()
     cursor.close()
@@ -146,11 +154,20 @@ def delete_recipe(recipeId):
     sql_query = "SELECT * FROM recipe WHERE id = {}".format(recipeId)
     cursor.execute(sql_query)
     recipeId = cursor.fetchone()
+    print(recipeId)
     
     return render_template("recipe_delete.html", recipeId=recipeId)
 
+# ROUTE : Confirmed delete recipe
 @app.route('/recipe/delete/confirmed/<recipeId>', methods=['POST'])
 def confirmed_delete_recipe(recipeId):
+    
+    connection = connect()
+    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql_query = "SELECT * FROM recipe WHERE id = {}".format(recipeId)
+    cursor.execute(sql_query)
+    
+    
     return redirect(url_for('index'))
 
 # Boilerplate
