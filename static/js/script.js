@@ -17,7 +17,7 @@ $(document).ready(function() {
             '<input type="text" class="form-control" name="ingred-serve[]" id="ingred-serve-[]" placeholder="insert your ingredient serving...">' +
             '</div>' +
             '<div class="form-group col-md-1 text-center">' +
-            '<button type="text" class="btn btn-danger align-middle remove-row" role="button" value=' + addRow + '>Remove</button>' +
+            '<button type="text" class="btn btn-danger align-middle remove-row" role="button" value=' + addRow + '><svg id="i-minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1rem" height="1rem" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2 16 L30 16" /></svg><span class="align-baseline"> Remove<span></button>' +
             '</div>' +
             '</div>'
 

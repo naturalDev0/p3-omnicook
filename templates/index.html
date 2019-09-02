@@ -7,7 +7,11 @@
     <div class="row">
         <div class="col-md-3">
             <h1>Welcome to Omnicook!</h1>
-            <a class="btn btn-primary" href="{{ url_for('add_recipe') }}" role="button">Add Recipe</a>
+            <a class="btn btn-primary" href="{{ url_for('add_recipe') }}" role="button">
+                <svg class="align-baseline" id="i-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1rem" height="1rem" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path d="M16 2 L16 30 M2 16 L30 16" />
+</svg>
+<span> Add Recipe</span></a>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-8">
@@ -15,7 +19,7 @@
                 {% for r in recipes %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img src="..." class="card-img-top" alt="...">
+                        <img src="{{url_for('static', filename='image/dish-with-nicebg-small.jpg')}}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ r['recipe_title']}}</h5>
                             <p class="card-text">{{ r['recipe_desc'] }}</p>
@@ -24,11 +28,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('view_recipe') }}">View</a>
-                                    <a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_recipe') }}">Edit</a>
-                                    <a class="btn btn-sm btn-outline-danger" href="{{ url_for('delete_recipe', recipeId=r['id']) }}">Delete</a>
-                                </div>
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('view_recipe', recipeId=r['id']) }}">View</a>
                             </div>
                         </div>
                     </div>

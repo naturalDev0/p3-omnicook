@@ -10,6 +10,15 @@
   margin-top: 5rem;
 }
 
+#i-plus {
+  top: .125em;
+  position: relative;
+}
+#i-minus {
+  top: .125em;
+  position: relative;
+}
+
 /* Footer layout
 */
 footer div a:link {
@@ -30,4 +39,35 @@ footer {
   background-color: #235789;
   color: white;
   text-align: center;
+}
+
+@media screen and (max-width: 365px) {
+  img#recipe-main-image {
+    width: 16rem;
+    height: 10rem;
+  }
+}
+@media screen and (min-width: 366px) and (max-width: 375px) {
+  img#recipe-main-image {
+    width: 18rem;
+    height: 12rem;
+  }
+}
+@media screen and (min-width: 376px) and (max-width: 562px) {
+  img#recipe-main-image {
+    width: 20rem;
+    height: 14rem;
+  }
+}
+@media screen and (min-width: 563px) and (max-width: 768px) {
+  img#recipe-main-image {
+    width: 30rem;
+    height: 20rem;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  img#recipe-main-image {
+    width: 40rem;
+    height: 26rem;
+  }
 }

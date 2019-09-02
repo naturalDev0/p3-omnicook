@@ -43,30 +43,28 @@ def index():
     # Set DB connection
     cursor = connection.cursor(pymysql.cursors.DictCursor)
     
-    sql_query = "SELECT recipe.id, recipe.recipe_title, recipe.recipe_desc, recipe.recipe_methods, cuisine.cuisine_type, author.author_name FROM recipe INNER JOIN cuisine ON recipe.cuisine_id=cuisine.id INNER JOIN author ON recipe.author_id=author.id"
+    sql_query = """
+                SELECT recipe.id, recipe.recipe_title, recipe.recipe_desc, recipe.recipe_methods, cuisine.cuisine_type, author.author_name
+                FROM recipe
+                INNER JOIN cuisine ON recipe.cuisine_id=cuisine.id
+                INNER JOIN author ON recipe.author_id=author.id
+                """
     
     cursor.execute(sql_query)
     recipes = []
     for r in cursor:
         recipes.append(r)
-    # print(recipes)
     
-    # sql_query = "SELECT cuisine_type FROM cuisine WHERE id= {}".format(recipes['cuisine_id'])
-    # cursor.execute(sql_query)
-    
-    cursor.close()
-    
+    cursor.close()          # Close DB connection
     return render_template("index.html", recipes=recipes)
 
 # ROUTE : Add recipe
 @app.route('/recipe/add', methods=['GET'])
 def add_recipe():
     
-    # Connect to DB
-    connection = connect()
     
-    # Set DB connection
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
     
     # Retrieve data from 'cuisine' table
     sql_query = "SELECT * FROM cuisine"
@@ -77,7 +75,7 @@ def add_recipe():
     for r in cursor:
         cuisines.append(r)
     
-    cursor.close()
+    cursor.close()          # Close DB connection
     return render_template("recipe_add.html", cuisines=cuisines)
     
 @app.route('/recipe/add', methods=['POST'])
@@ -102,7 +100,6 @@ def create_add_recipe():
         sql_query = "INSERT INTO ingredient_name (ingred_name) VALUES ('{}')".format(i)
         cursor.execute(sql_query)
         last_ingred_name_ids.append(cursor.lastrowid)
-    print("IngredNameIds: {}".format(last_ingred_name_ids))
     
     # Get last row id of ingredient
     ingred_ids = []
@@ -127,8 +124,8 @@ def create_add_recipe():
         sql_query = "INSERT INTO ingredient_recipe (ingredient, recipe) VALUES ({}, {})".format(i, last_recipe_id)
         cursor.execute(sql_query)
     
-    connection.commit()
-    cursor.close()
+    connection.commit()                                     # Committing changes to database
+    cursor.close()                                          # Close DB connection
     
     return redirect(url_for('index'))
 
@@ -139,9 +136,31 @@ def edit_recipe():
     return render_template("recipe_edit.html")
 
 # ROUTE : View recipe    
-@app.route('/recipe')
-def view_recipe():
-    return render_template("recipe_view.html")
+@app.route('/recipe/<recipeId>')
+def view_recipe(recipeId):
+    
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
+    
+    sql_query = """
+                SELECT r.id, r.recipe_title, r.recipe_desc, r.recipe_methods, c.cuisine_type, a.author_name, ingredName.ingred_name, i.ingred_serving
+                FROM recipe AS r
+                INNER JOIN cuisine AS c ON c.id=r.cuisine_id
+                INNER JOIN author AS a ON a.id=r.author_id
+                INNER JOIN ingredient_recipe AS ir ON ir.recipe=r.id
+                INNER JOIN ingredient AS i ON i.id=ir.ingredient
+                INNER JOIN ingredient_name AS ingredName ON ingredName.id=i.ingred_name_id
+                WHERE r.id=%s
+                """
+    cursor.execute(sql_query, [recipeId])
+    recipe = []
+    for r in cursor:
+        recipe.append(r)
+    
+    # connection.commit()                                     # Committing changes to database
+    cursor.close()                                          # Close DB connection
+    
+    return render_template("recipe_view.html", recipe=recipe)
 
 # ROUTE : Delete recipe    
 @app.route('/recipe/delete/<recipeId>')
@@ -195,11 +214,8 @@ def confirmed_delete_recipe(recipeId):
     sql_query = "DELETE FROM recipe WHERE id={}".format(recipeId)
     cursor.execute(sql_query)
     
-    # Committing changes to database
-    connection.commit()
-    
-    # Close connection
-    cursor.close()
+    connection.commit()                                     # Committing changes to database
+    cursor.close()                                          # Close DB connection
     
     return redirect(url_for('index'))
 

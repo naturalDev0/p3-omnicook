@@ -20,21 +20,10 @@
 
     <!-- navbar content -->
     <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top mb-5">
-      <a class="navbar-brand" href="{{ url_for('index') }}">Omnicook</a>
+      <a class="navbar-brand" href="{{ url_for('index') }}"><h3>Omnicook</h3></a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#omnicook-navbar" aria-controls="omnicook-navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="navbar-collapse collapse" id="omnicook-navbar">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('add_recipe') }}">add.</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('edit_recipe') }}">edit.</a>
-            </li>
-        </ul>
-      </div>
     </nav>
 
     <!-- main content -->
@@ -47,7 +36,7 @@
     </main>
 
     <!-- footer content -->
-    <footer class="container-fluid mt-5 pt-2 bg-dark">
+    <footer class="container-fluid mt-3 pt-2 bg-dark">
         <div class="row">
             <div class="col">
                 <p>Tommy Lee &copy; 2019</p>

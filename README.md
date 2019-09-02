@@ -128,9 +128,13 @@ NOTE: All commits are pushed to master branch, as currently there is no intentio
 
 <i>- I have took inspirations from the following sites...</i>
 
-Misc
+→ Misc
 1. [Google Fonts](https://fonts.google.com/) - (Font)
 2. [Bytesize Icons](https://github.com/danklammer/bytesize-icons)
+
+→ Image
+1. [unsplash - brooke lark](https://unsplash.com/photos/4J059aGa5s4)
+    * Image has been shrinked to width: 512px, height: 341px
 
 → Web layout
 1. [kinokuniya](https://kinokuniya.com.sg/)
@@ -142,5 +146,6 @@ Misc
 1. [foodnetwork](https://www.foodnetwork.com/)
 1. [bbcgoodfood's cuisines](https://www.bbcgoodfood.com/recipes/category/cuisines)
     * Idea on the ‘Type of cuisines’
+
 
 ***This is for educational use.***
