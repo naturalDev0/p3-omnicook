@@ -131,9 +131,49 @@ def create_add_recipe():
 
 
 # ROUTE : Edit recipe
-@app.route('/recipe/edit')
-def edit_recipe():
-    return render_template("recipe_edit.html")
+@app.route('/recipe/edit/<recipeId>')
+def edit_recipe(recipeId):
+    
+    connection = connect()                                                  # Connect to DB
+    cursor = connection.cursor(pymysql.cursors.DictCursor)                  # Set DB connection
+    
+    # Retrieve data from 'cuisine' table
+    sql_query = "SELECT * FROM cuisine"
+    cursor.execute(sql_query)
+    
+    # Store results in a 'cuisines' list
+    cuisines = []
+    for r in cursor:
+        cuisines.append(r)
+    
+    sql_query = """
+                SELECT r.id, r.recipe_title, r.recipe_desc, r.recipe_methods, r.cuisine_id, a.author_name
+                FROM recipe AS r
+                INNER JOIN author AS a ON a.id=r.author_id WHERE r.id=%s
+                """
+    cursor.execute(sql_query, [recipeId])
+    recipe = []
+    for r in cursor:
+        recipe.append(r)
+        
+    sql_query = """
+                SELECT ingredName.ingred_name, ingred.ingred_serving
+                FROM ingredient_name AS ingredName
+                INNER JOIN ingredient AS ingred ON ingred.ingred_name_id=ingredName.id
+                INNER JOIN ingredient_recipe AS in_re ON in_re.ingredient=ingred.id
+                WHERE in_re.recipe=%s
+                """
+    cursor.execute(sql_query, [recipeId])
+    ingredServe = []
+    for i in cursor:
+        ingredServe.append(i)
+    print(ingredServe)
+    
+    return render_template("recipe_edit.html", recipe=recipe, cuisines=cuisines, ingredients=ingredServe)
+
+@app.route('/recipe/edit/<recipeId>', methods=['POST'])
+def update_recipe(recipeId):
+    return redirect(url_for('index'))
 
 # ROUTE : View recipe    
 @app.route('/recipe/<recipeId>')
