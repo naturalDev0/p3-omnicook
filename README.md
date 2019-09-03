@@ -24,19 +24,18 @@ In this section, you should go over the different parts of your project, and des
 
 <i>Users can ...</i>
 
-* Feature #1 - 
-* Feature #2 - 
-* Feature #3 - 
-* Feature #4 - 
-* Feature #5 - 
-* Feature #6 - 
+* Feature #1 - Create new recipe
+* Feature #2 - View recipe individually
+* Feature #3 - View several recipes on home page
+* Feature #4 - Delete selected recipe
+* Feature #5 - Update and Delete recipe
 
 ### Features Left to Implement
-- Another feature idea
+1. Feature #1 - Filter search results of 'recipe' table
+1. Feature #2 - Check and delete ingredient names inside 'ingredient_name' table to maintain data integrity
+1. Feature #3 -
 
 ## Technologies Used
-
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
 
 <i>"< Delete this sectiion once done writing ...>"</i>
 
@@ -52,16 +51,43 @@ Things to write in this section are ...
 
 1. HTML5 --- *required*
 1. CSS3 --- *required*
+    1. Import Google Font CDN and style certain HTML components
+    1. Add in @media (media queries) to control element size when screen size changed
 1. JavaScript --- *required*
     * Use it add in certain functions such as (e.g. click, ready, on ...),
-        * Dyanmically generate
+        * Dynamically generate HTML elements
+        * Components such as ...
+            1. *append()*        - Add in element into selector
+            1. *children()*      - Point to the children HTML element of the parent selector
+            1. *last()*          - Point to the last children HTML element of the parent selector
+            1. *attr()*          - Use it to retreive id HTML element
+            1. *val()*           - Retrieve the value of the HTML element
+1. [Bootstrap 4.3](https://getbootstrap.com/)
+    * Speed up website building through simple ready made components
+    * Components used ...
+        1. *form-group*          -
+        1. *form-row*            -
+        1. *container*
+            * *container-fluid*  -
+        1. 
 1. [JQuery](https://jquery.com)
-    * The project uses **JQuery** to simplify DOM manipulation.
-1. Python 3
-1. Flask
-1. MySQL
-1. ClearDB
-    * *This is required to deploy on Heroku*
+    * Use to 
+1. [Python 3.6.8](https://docs.python.org/3.6/)
+    * Back-end language that helps to link front-end data to DB.
+    * Components used ...
+        1.
+        1.
+        1.
+        1.
+        
+
+        
+1. [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+    * Use to developed dynamic web link routes. An micro framework.
+1. [MySQL](https://www.mysql.com/)
+    * Use to store database
+1. [ClearDB](https://w2.cleardb.net/)
+    * *This is required to deploy on Heroku as they don't support MySQL on the platform*
 
 
 ## Testing
@@ -121,16 +147,13 @@ NOTE: All commits are pushed to master branch, as currently there is no intentio
 
 ## Credits
 
-### Content
-* 
-
 ### Acknowledgements
 
 <i>- I have took inspirations from the following sites...</i>
 
 → Misc
 1. [Google Fonts](https://fonts.google.com/) - (Font)
-2. [Bytesize Icons](https://github.com/danklammer/bytesize-icons)
+2. [Bytesize Icons](https://github.com/danklammer/bytesize-icons) - (Icons)
 
 → Image
 1. [unsplash - brooke lark](https://unsplash.com/photos/4J059aGa5s4)

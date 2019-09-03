@@ -3,21 +3,20 @@
 
 <!-- Main Content section -->
 {% block content %}
-<h2>EDIT Recipe</h2>
+<h2>Edit Recipe</h2>
 <div>
     <a class="btn btn-warning" href="{{ url_for('index') }}" role="button">Back to Home</a>
 </div>
 <div class="container mt-3">
-    <form method="POST" action="{{ url_for('update_recipe', recipeId=recipe['id']) }}">
     {% for r in recipe %}
+    <form method="POST" action="{{ url_for('update_recipe', recipeId=r['id']) }}">
         <div class="form-group">
             <label for="recipeName">Name</label>
-            <input type="text" class="form-control" name="recipeName" id="recipeName" placeholder="recipe name" value="{{ r['recipe_title'] }}">
+            <input type="text" class="form-control" name="recipeName" placeholder="recipe name" value="{{ r['recipe_title'] }}">
         </div>
-        
         <div class="form-group">
             <label for="recipeDesc">Description</label>
-            <textarea class="form-control" id="recipeDesc" name="recipeDesc" placeholder="E.g.&#10;This is recipe that contains ..." rows="4">{{ r['recipe_desc'] }}</textarea>
+            <textarea class="form-control" name="recipeDesc" placeholder="E.g.&#10;This is recipe that contains ..." rows="4">{{ r['recipe_desc'] }}</textarea>
         </div>
         <div class="form-group" id="fields">
             <label for="recipeIngredients">Ingredients
@@ -36,32 +35,33 @@
                     <input type="text" class="form-control" name="ingred-serve[]" placeholder="insert your ingredient serving..." value="{{ i['ingred_serving'] }}">
                 </div>
                 <div class="form-group col-md-1 text-center">
-                    <button type="text" class="btn btn-danger align-middle remove-row" role="button" value='#field{{ loop.index }} '><svg id="i-minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1rem" height="1rem" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2 16 L30 16" /></svg><span class="align-baseline"> Remove<span></button>
+                    <button type="text" class="btn btn-danger align-middle remove-row" role="button" value='#field{{ loop.index }} '><svg id="i-minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="1rem" height="1rem" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2 16 L30 16" /></svg><span class="align-baseline"> Remove</span>
+                    </button>
                 </div>
             </div>
             {% endfor %}
         </div>
         <div class="form-group">
             <label for="recipeMethods">Methods</label>
-            <textarea class="form-control" id="recipeMethods" name="recipeMethods" placeholder="E.g.&#10;Step 1. Add pepper&#10;Step 2. Chop the garlics..." rows="4">{{ r['recipe_methods'] }}</textarea>
+            <textarea class="form-control" name="recipeMethods" placeholder="E.g.&#10;Step 1. Add pepper&#10;Step 2. Chop the garlics..." rows="4">{{ r['recipe_methods'] }}</textarea>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="recipeAuthor">Author</label>
-                <input type="text" class="form-control" id="recipeAuthor" name="recipeAuthor" placeholder="recipe author" value="{{ r['author_name'] }}">
+                <input type="text" class="form-control" name="recipeAuthor" placeholder="recipe author" value="{{ r['author_name'] }}">
             </div>
             <div class="form-group col-md-6">
                 <label for="recipeCuisine">Cuisine</label>
-                <select name="recipeCuisine" class="form-control" id="recipeCuisine">
+                <select name="recipeCuisine" class="form-control">
                     {%for c in cuisines %}
                         <option value='{{ c['id'] }}' {%if c['id'] == r['cuisine_id'] %}selected='selected'{% endif %}>{{ c['cuisine_type'] }}</option>
                     {%endfor%}
                 </select>
             </div>
         </div>
-        
+
         {% endfor %}
-        
+
         <button type="submit" class="btn btn-primary" role="button">Submit Recipe</button>
     </form>
 </div>
