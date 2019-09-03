@@ -1,4 +1,4 @@
-# [Omnicook](https://omnicook-tl.herokuapp.com/){:target="_blank"}
+# [Omnicook](https://omnicook-tl.herokuapp.com/)
 
 
 Code-Institute Project #3 : An cookbook project that shows different varieties of recipe for hobbyist to get inspirations and ideas to jumpstart them in learning how to cook and make delicious form of dishes.
