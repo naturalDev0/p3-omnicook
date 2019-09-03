@@ -1,33 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymysql
-# import urllib.parse
-# from urllib.parse import urlparse
+import urllib.parse
+from urllib.parse import urlparse
 
-# urllib.parse.uses_netloc.append("mysql")
+urllib.parse.uses_netloc.append("mysql")
 
-# url = urlparse(os.environ['CLEARDB_DATABASE_URL'])
-# database = url.path[1:]
-# username = url.username
-# password = url.password
-# host = url.hostname
-# port = url.port
-
-# Initialize selected DB connection
-# connection = pymysql.connect(
-#     host=host,              # IP address of the database; localhost means "the local machine"
-#     user=username,          #the mysql user
-#     password=password,      #the password for the user
-#     database=database,      #the name of database we want to use
-#     port=port
-# )
+url = urlparse(os.environ['CLEARDB_DATABASE_URL'])
+database = url.path[1:]
+username = url.username
+password = url.password
+host = url.hostname
+port = url.port
 
 def connect():
+    
+    # Initialize selected DB connection
     connection = pymysql.connect(
-        host="localhost",               # IP address of the database; localhost means "the local machine"
-        user="admin",                   # the mysql user
-        password="n0tY0urP@55w0rd",     # the password for the user
-        database="cookbook"             # the name of database we want to use
+        host=host,              # IP address of the database; localhost means "the local machine"
+        user=username,          # the mysql user
+        password=password,      # the password for the user
+        database=database,      # the name of database we want to use
+        port=port               # 
     )
     return connection
 
