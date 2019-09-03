@@ -1,4 +1,4 @@
-# [Omnicook](https://naturaldev0.github.io/p3-omnicook/)
+# [Omnicook](https://omnicook-tl.herokuapp.com/)
 
 Code-Institute Project #3 : An cookbook project that shows different varieties of recipe for hobbyist to get inspirations and ideas to jumpstart them in learning how to cook and make delicious form of dishes.
  
@@ -6,15 +6,30 @@ Code-Institute Project #3 : An cookbook project that shows different varieties o
 ## UI / UX
 
 ### Interface
-1. You can refer to the UI through [here](https://drive.google.com/file/d/15hE_VO6VaOnUheitaI-4sei5_7XlH8Kt/view?usp=sharing).
-
+1. You can refer to the initial UI through [here](https://drive.google.com/file/d/15hE_VO6VaOnUheitaI-4sei5_7XlH8Kt/view?usp=sharing).
+    * NOTE: The existing UI/UX has certain change.
+ 
 ### Experience
-User Stores: --> <i>(e.g. As a user type, I want to perform an action, so that I achieve a goal.)</i>
+User Stories: --> <i>(e.g. As a user type, I want to perform an action, so that I achieve a goal.)</i>
 
-1. <i>(stories ...)</i> As a user type, I want to perform an action, so that I can achieve a goal.
-1. <i>(stories ...)</i> As a user type, I want to perform an action, so that I can achieve a goal.
-1. <i>(stories ...)</i> As a user type, I want to perform an action, so that I can achieve a goal.
-1. <i>(stories ...)</i> As a user type, I want to perform an action, so that I can achieve a goal.
+*As a user...*
+1. I want to filter recipes by name, so that I can easily find the recipe with the name in mind.
+1. I want to filter recipes by cuisine, so that I can search for other interesting recipes as well.
+1. I want to edit recipe, so that I can make amendments when I changed my mind.
+1. I want to delete recipe, so that I can remove them when they are no longer needed.
+1. I want to view recipes individually, so that I can focus on the contents.
+1. I want to upload recipe image, so that I can make the recipe card with familiarity.
+
+### Database Schema
+
+*ER Diagram*
+
+![alt text](/documents/p3_omnicook_er-diagram.png "omnicook_er-diagram")
+
+*Actual model*
+
+![alt text](/documents/p3_omnicook_db-model.png "omnicook_db-model")
+
 
 ## Features
 
@@ -31,30 +46,19 @@ In this section, you should go over the different parts of your project, and des
 * Feature #5 - Update and Delete recipe
 
 ### Features Left to Implement
-1. Feature #1 - Filter search results of 'recipe' table
-1. Feature #2 - Check and delete ingredient names inside 'ingredient_name' table to maintain data integrity
-1. Feature #3 -
+* Feature #1 - Filter search results of *'recipe'* table
+* Feature #2 - Check and delete ingredient names inside *'ingredient_name'* table to maintain data integrity
+* Feature #3 - Upload images along with the desired recipe
+<br/>
 
 ## Technologies Used
-
-<i>"< Delete this sectiion once done writing ...>"</i>
-
-Things to write in this section are ...
-
-1. Languages, Frameworks, Libraries, and any other tools
-1. Structure of the sentence :
-    1. [ name ]
-    1. [ link to its official site ]
-    1. [ short sentence ex ]
-    
-<i>"< Delete this sectiion once done writing ...>"</i>
 
 1. HTML5 --- *required*
 1. CSS3 --- *required*
     1. Import Google Font CDN and style certain HTML components
     1. Add in @media (media queries) to control element size when screen size changed
 1. JavaScript --- *required*
-    * Use it add in certain functions such as (e.g. click, ready, on ...),
+    * Add in certain functions such as (e.g. click, ready, on ...),
         * Dynamically generate HTML elements
         * Components such as ...
             1. *append()*        - Add in element into selector
@@ -65,53 +69,72 @@ Things to write in this section are ...
 1. [Bootstrap 4.3](https://getbootstrap.com/)
     * Speed up website building through simple ready made components
     * Components used ...
-        1. *form-group*          -
-        1. *form-row*            -
-        1. *container*
-            * *container-fluid*  -
-        1. 
+        1. *form-group*          - Individual form group components that managed 
+        1. *form-row*            - Form rows 
+        1. *container*           - A box that has formatted paddings that centralized contents in the middle of the webpage
+        1. *container-fluid*     - A box that takes up the whole width of the webpage.
+        1. *...*
+
 1. [JQuery](https://jquery.com)
-    * Use to 
+    * Manipulate HTML selectors.
+
 1. [Python 3.6.8](https://docs.python.org/3.6/)
     * Back-end language that helps to link front-end data to DB.
-    * Components used ...
-        1.
-        1.
-        1.
-        1.
-        
-
+    * Components used (some)...
+        1. *Function*
+        1. *list [ ]*            - Act like an array, to temporarily store values
+        1. *append()*            - Insert new values into list
+        1. *...*
         
 1. [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-    * Use to developed dynamic web link routes. An micro framework.
+    * Developed dynamic web link routes. An micro framework.
+
 1. [MySQL](https://www.mysql.com/)
-    * Use to store database
+    * The database framework is used in this project.
+
 1. [ClearDB](https://w2.cleardb.net/)
-    * *This is required to deploy on Heroku as they don't support MySQL on the platform*
+    * *This is required to deploy on Heroku as they don't support MySQL on the platform.*
 
 
 ## Testing
 
 <i>These are the tests I have done so far...</i>
+
+### Manual Test
+1. Add Recipe (recipe_add.html) --- Steps
+    1. *Select 'Add Recipe' button on home page ('index.html')*
+    1. *Key in desire values into fields*
+    1. *Select 'Submit Recipe' button to submit the recipe*
+    1. *User is directed to index*
+    1. *Recipe is displayed on the page*
+
+1. Edit Recipe (recipe_edit.html) --- Steps
+    1. *Select 'View' button on the desired recipe*
+    1. *Select 'Edit' button to edit recipe*
+    1. *Update the fields with the desired values*
+    1. *Select 'Submit Recipe' button to update the recipe*
+    1. *User is direct to index*
+    1. *Changes is reflected on the recipe card* 
+
+1. Delete Recipe (recipe_delete.html) --- Steps
+    1. *Select 'View' button on the desired recipe*
+    1. *Select 'Delete' button to be directed delete confirmation page*
+    1. *Select 'Delete' button to delete the recipe*
+    1. *Otherwise, revert back to index homepage*
+
+1. Read Recipe items (recipe_view, recipe_add, recipe_edit, recipe_delete) --- Steps
+    * *This function appears is commonly used in several pages*
+
+### Missing Tests
+*Due to time constraints ... These are the features with tests I have yet to implement*
+
+1. Form validations
+    * Currently the form has no validations, users can freely type any desired values into fields.
+1. Data integrity
+    * *"ingredient_name"* table data will keep stacking up as currently it does not have logics in Back-End to ensure zero duplications.
 <hr>
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
 
 ## Deployment
 
@@ -130,45 +153,60 @@ If this section grows too long, you may want to split it off into a separate fil
     ```
 2. Add your remote git link for uploading your files onto Github later on.
     ```
-    git remote add origin <your-remote-git-link>    // add your remote repo link
+    // add your remote repo link
+    git remote add origin https://github.com/naturalDev0/p3-omnicook.git
     ```
 3. Push your files onto your remote
     ```
-    git push -u origin master   // upload your files into your remote repo
+    // upload your files into your remote repo
+    git push -u origin master
     ```
 
 4. Should you have the interest to work the files offline, you can do so by cloning a copy.
     ```
-    git clone <remote-link>     // Clone the selected repo offline
+    // Clone the selected repo offline
+    git clone https://github.com/naturalDev0/p3-omnicook.git
     ```
 
-NOTE: All commits are pushed to master branch, as currently there is no intention of creating new branches.
-<br><br>
+    NOTE: All commits are pushed to master branch, as currently there is no intention of creating new branches.
+<br/><br/>
+
+### Additional packages to install
+1. Flask
+    ```
+    pip3 install Flask          // Install Flask package to get started
+    ```
+1. PyMySQL
+    ```
+    pip3 install pymysql        // Install PyMySQL to coding CRUD with MySQL
+    ```
+<br/>
 
 ## Credits
 
 ### Acknowledgements
 
-<i>- I have took inspirations from the following sites...</i>
+*I have took inspirations from the following sites...*
 
-→ Misc
+Misc
 1. [Google Fonts](https://fonts.google.com/) - (Font)
 2. [Bytesize Icons](https://github.com/danklammer/bytesize-icons) - (Icons)
 
-→ Image
+Image
 1. [unsplash - brooke lark](https://unsplash.com/photos/4J059aGa5s4)
     * Image has been shrinked to width: 512px, height: 341px
 
-→ Web layout
+Web layout
 1. [kinokuniya](https://kinokuniya.com.sg/)
 1. [justonecookbook](https://www.justonecookbook.com/)
 1. [popular](https://www.popular.com.sg/)
 
-→ Web layout, Fields to implement in DB
+Web layout, Fields to implement in DB
 1. [allrecipes](https://www.allrecipes.com/)
 1. [foodnetwork](https://www.foodnetwork.com/)
 1. [bbcgoodfood's cuisines](https://www.bbcgoodfood.com/recipes/category/cuisines)
     * Idea on the ‘Type of cuisines’
 
+<br/>
 
-***This is for educational use.***
+***This project is for educational use. Thank you for your understanding.***
