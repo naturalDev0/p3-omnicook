@@ -132,8 +132,8 @@ In this section, you should go over the different parts of your project, and des
     * Currently the form has no validations, users can freely type any desired values into fields.
 1. Data integrity
     * *"ingredient_name"* table data will keep stacking up as currently it does not have logics in Back-End to ensure zero duplications.
-<hr>
 
+<br/>
 
 
 ## Deployment
