@@ -1,4 +1,4 @@
-# [Omnicook](https://omnicook-tl.herokuapp.com/)
+# <a href="https://omnicook-tl.herokuapp.com/" target="_blank">Omnicook</a>
 
 Code-Institute Project #3 : An cookbook project that shows different varieties of recipe for hobbyist to get inspirations and ideas to jumpstart them in learning how to cook and make delicious form of dishes.
  
@@ -7,7 +7,7 @@ Code-Institute Project #3 : An cookbook project that shows different varieties o
 
 ### Interface
 1. You can refer to the initial UI through [here](https://drive.google.com/file/d/15hE_VO6VaOnUheitaI-4sei5_7XlH8Kt/view?usp=sharing).
-    * NOTE: The existing UI/UX has certain change.
+    * NOTE: *The existing UI/UX has been changed.*
  
 ### Experience
 User Stories: --> <i>(e.g. As a user type, I want to perform an action, so that I achieve a goal.)</i>
